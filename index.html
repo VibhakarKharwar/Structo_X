@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>StructoX — AI Structural Intelligence</title>
 
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -14,7 +15,7 @@ body{
 margin:0;
 font-family:'DM Sans',sans-serif;
 background:#090907;
-color:#170f0f
+color:#1f65cd
 }
 
 .container{
@@ -23,33 +24,38 @@ min-height:100vh
 }
 
 .sidebar{
-width: 100px;
-background:#db9b1b;
+width:100px;
+background:#1f65cd;
 border-right:1px solid #e5e5e5;
 padding:20px
 }
 
+.sidebar-logo{
+width: 75px;
+display:block;
+margin:0 auto 30px auto
+}
+
 .logo{
-font-weight:700;
-font-size:18px;
-margin-bottom:30px
+text-align:center
 }
 
 .nav button{
 display:block;
 width:100%;
-padding:10px;
+padding:12px;
 border:none;
 background:none;
 text-align:left;
 font-size:14px;
-margin-bottom:6px;
+margin-bottom:8px;
 border-radius:8px;
-cursor:pointer
+cursor:pointer;
+color:white
 }
 
 .nav button:hover{
-background:#f3f3f3
+background:rgba(255,255,255,0.15)
 }
 
 .main{
@@ -66,6 +72,12 @@ display:flex;
 align-items:center;
 padding:0 25px;
 gap:10px
+}
+
+.top-logo{
+height:30px;
+margin-right:10px
+width:75px
 }
 
 .search{
@@ -155,15 +167,18 @@ border-radius:6px
 }
 
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
+<!-- SIDEBAR -->
 <div class="sidebar">
-<div class="logo">StructoX</div>
+
+<div class="logo">
+<img src="logo.png" class="sidebar-logo">
+</div>
 
 <div class="nav">
 <button>Dashboard</button>
@@ -172,13 +187,16 @@ border-radius:6px
 <button>Materials</button>
 <button>Report</button>
 </div>
+
 </div>
 
+<!-- MAIN -->
 <div class="main">
 
+<!-- TOP BAR -->
 <div class="topbar">
 
-<img src="logo.png" class="top-logo">
+<img src="name.png" class="top-logo">
 
 <input class="search" placeholder="Search plans...">
 
@@ -188,6 +206,7 @@ border-radius:6px
 
 </div>
 
+<!-- CONTENT -->
 <div class="content">
 
 <div class="card">
@@ -205,7 +224,7 @@ border-radius:6px
 Choose File
 </button>
 
-<img id="preview" class="preview"/>
+<img id="preview" class="preview">
 
 <div id="status" class="status"></div>
 
@@ -251,7 +270,9 @@ Choose File
 </tr>
 
 </tbody>
+
 </table>
+
 </div>
 
 </div>
@@ -267,11 +288,9 @@ const drop=document.getElementById('drop')
 
 fileInput.addEventListener('change',()=>{
 const file=fileInput.files[0]
-
 if(!file)return
 
 preview.src=URL.createObjectURL(file)
-
 status.innerText="Running analysis..."
 
 setTimeout(()=>{
@@ -293,7 +312,6 @@ drop.addEventListener('drop',e=>{
 e.preventDefault()
 
 const file=e.dataTransfer.files[0]
-
 fileInput.files=e.dataTransfer.files
 
 preview.src=URL.createObjectURL(file)
@@ -329,7 +347,6 @@ recognition.maxAlternatives=1
 recognition.onresult=function(event){
 
 const text=event.results[0][0].transcript
-
 document.querySelector(".search").value=text
 
 }
